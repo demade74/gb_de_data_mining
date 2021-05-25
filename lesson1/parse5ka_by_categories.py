@@ -19,7 +19,7 @@ class Parse5kaByCategories(Parse5ka):
 
             params = {'categories': category['parent_group_code']}
             current_response = requests.get(self.start_url, headers=self.headers, params=params).json()
-            goods_data['products'] = goods_data['products'] + current_response['results']
+            goods_data['products'] += current_response['results']
 
             while True:
                 if not current_response['next']:
@@ -27,7 +27,7 @@ class Parse5kaByCategories(Parse5ka):
                 else:
                     current_response = self._get_response(current_response['next']).json()
                     next_page_goods_data = current_response['results']
-                    goods_data['products'] = goods_data['products'] + next_page_goods_data
+                    goods_data['products'] += next_page_goods_data
 
             yield goods_data
             print(f"Товарная категория {category['parent_group_name']} обработана")
