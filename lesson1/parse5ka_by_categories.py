@@ -6,7 +6,7 @@ class Parse5kaByCategories(Parse5ka):
     def _get_categories(self) -> list:
         categories_url = 'https://5ka.ru/api/v2/categories/'
         response = self._get_response(categories_url)
-        return list(response.json())
+        return response.json()
 
     def _parse(self, url):
         categories = self._get_categories()
