@@ -96,23 +96,13 @@ class GbBlogParse:
 
     @staticmethod
     def _get_post_comments(url: str, soup: bs4.BeautifulSoup) -> list:
-        comments = list()
         params = {
             'commentable_id': soup.find('comments').attrs.get('commentable-id'),
             'commentable_type': soup.find('comments').attrs.get('commentable-type'),
             'order': 'desc'
         }
-        response = requests.get(url, params=params).json()
-
-        for item in response:
-            comment = item.get('comment')
-            comments.append({
-                'author': comment.get('user').get('full_name'),
-                'text': comment.get('body'),
-                'created_at': datetime.fromisoformat(comment.get('created_at'))
-            })
-
-        return comments
+        response = requests.get(url, params=params)
+        return response.json()
 
     def _save(self, data):
         collection = self.db["gb_parse_24_05"]["gb_parse"]
