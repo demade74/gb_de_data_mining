@@ -6,6 +6,7 @@ VACANCY_DATA = {
     'author': "//a[@data-qa='vacancy-company-name']/@href"
 }
 
+
 COMPANY_DATA = {
     'name': "//span[@data-qa='company-header-title-name']/text()",
     'trusted': "//span[@class='company-header-title-trusted']",
